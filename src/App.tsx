@@ -10,7 +10,6 @@ import './App.scss';
 
 import {
   getDailyData,
-  getDailyInfoByDate,
   getAllInfo,
   getCountries,
   getInfoByCountry,
