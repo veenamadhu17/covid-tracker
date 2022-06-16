@@ -1,0 +1,38 @@
+body {
+  background-color: #f9f9f9;
+  padding: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+
+  &__left {
+    flex: 0.9
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      color: #790059;
+      font-size: 2rem;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media(max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
+}
