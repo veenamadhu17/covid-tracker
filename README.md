@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![alt text](./public/webapp.PNG)
 
-This COVID Tracker shows the total number of corona cases, recovered cases and number of deathes globally and by country. It also includes a line graph that shows the numbers per day globally and bar graphs for each country.
+This COVID Tracker shows the total number of corona cases, recovered cases and number of deaths globally and by country. It also includes a line graph that shows the numbers per day globally and bar graphs for each country.
 
 ## How to run
 
