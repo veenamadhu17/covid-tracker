@@ -26,11 +26,6 @@ interface Country {
   iso3: string;
 }
 
-interface CountryListResponse {
-  country: string;
-  countryInfo: { iso2: string, iso3: string };
-}
-
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [country, setCountry] = useState<string>("");
