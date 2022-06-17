@@ -37,14 +37,13 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [covidInfo, setCovidInfo] = useState<CovidInfo | undefined>(undefined);
   const [dailyInfo, setDailyInfo] = useState<DailyInfo[]>([]);
-  //const [casesType, setCasesType] = useState<"cases" | "deaths" | "recovered">("cases");
 
   useEffect(() => {
     const getCountriesList = async () => {
       const response = await getCountries();
-      const r: CovidInfo[][] = Object.values(response);
+      const data: CovidInfo[][] = Object.values(response);
 
-      let countryList = r[0].map((country: CovidInfo) => ({
+      let countryList = data[0].map((country: CovidInfo) => ({
         name: country.name,
         iso2: country.iso2,
         iso3: country.iso3,
@@ -71,10 +70,9 @@ function App() {
   useEffect(() => {
     const fetchDailyData = async () => {
       const response = await getDailyData();
-      const r: DailyInfo[] = Object.values(response);
+      const data: DailyInfo[] = Object.values(response);
 
-      setDailyInfo(r);
-      console.log(r);
+      setDailyInfo(data);
     };
     fetchDailyData();
   }, []);
@@ -92,10 +90,8 @@ function App() {
     if (countryC === "Global") {
       response = await getAllInfo();
       changeGraph = Object.values(await getDailyData());
-      console.log(response);
     } else {
       response = await getInfoByCountry(countryC);
-      console.log(response);
       changeGraph = [];
     }
     setCovidInfo(response);
