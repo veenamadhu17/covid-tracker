@@ -41,9 +41,8 @@ function App() {
   useEffect(() => {
     const getCountriesList = async () => {
       const response = await getCountries();
-      const data: CovidInfo[][] = Object.values(response);
 
-      let countryList = data[0].map((country: CovidInfo) => ({
+      let countryList = response.countries.map((country: CovidInfo) => ({
         name: country.name,
         iso2: country.iso2,
         iso3: country.iso3,
