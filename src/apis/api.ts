@@ -11,17 +11,6 @@ const getDailyData = async () => {
     }
 };
 
-const getDailyInfoByDate = async (date: string) => {
-    try {
-        const response = await fetch(`${url}/daily/${date}`);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log(error);
-        return [];
-    }
-};
-
 const getAllInfo = async () => {
     try {
         const response = await fetch(`${url}`);
@@ -58,7 +47,6 @@ const getInfoByCountry = async (country: string) => {
 export {
     getAllInfo,
     getDailyData,
-    getDailyInfoByDate,
     getCountries,
     getInfoByCountry,
 };

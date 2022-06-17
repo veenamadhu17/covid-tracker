@@ -2,7 +2,8 @@ import React, {FunctionComponent, useEffect, useState} from "react";
 import "./index.scss";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from 'chart.js';
-ChartJS.register(...registerables);
+
+ChartJS.register(...registerables || []);
 
 interface Props {
     infected: number;
@@ -14,6 +15,7 @@ interface Props {
 const BarChart: FunctionComponent<Props> = ({infected, recovered, deaths, country}) => {
     const barChart = 
       <Bar
+        data-testid="bar_test"
         data={{
           labels: ["Infected", "Recovered", "Deaths"],
           datasets: [

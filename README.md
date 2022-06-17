@@ -14,3 +14,7 @@ In the project directory, you can run:
 
 This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## `npm run test`
+
+This runs the tests and you can see the results in the terminal.

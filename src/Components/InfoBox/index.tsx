@@ -18,6 +18,7 @@ const InfoBox: FunctionComponent<Props> = ({
 }) => {
     return (
         <Card 
+            data-testid="infoBox_test"
             className="info-box"
         >
             <CardContent>

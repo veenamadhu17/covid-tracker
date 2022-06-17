@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from "react";
 import "./index.scss";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from 'chart.js';
-ChartJS.register(...registerables);
+ChartJS.register(...registerables || []);
 
 interface Props {
     infected: number[];
@@ -11,8 +11,9 @@ interface Props {
 } 
 
 const LineChart: FunctionComponent<Props> = ({infected, deaths, dates}) => {
-    const lineChart = dates.length ? (
+    const lineChart = 
         <Line
+            data-testid="line_test"
             data={{
                 labels: dates,
                 datasets: [
@@ -32,7 +33,6 @@ const LineChart: FunctionComponent<Props> = ({infected, deaths, dates}) => {
             }}
             height={"90%"}
         />
-    ) : null;
 
     return (
         <div className="container"> {lineChart}</div>
