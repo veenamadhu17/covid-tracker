@@ -8,13 +8,19 @@ This COVID Tracker shows the total number of corona cases, recovered cases and n
 
 ## How to run
 
+Make sure that you have [Node.js](https://nodejs.org/en/) installed
 In the project directory, you can run:
 
-### `npm start`
+```console
+npm install
+npm start
+```
 
 This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## `npm run test`
+```console
+npm run test
+```
 
 This runs the tests and you can see the results in the terminal.
