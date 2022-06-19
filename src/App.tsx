@@ -1,6 +1,7 @@
 import React, {useEffect, useState, ChangeEvent} from 'react';
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select"
+import { ListSubheader, TextField, Box } from '@mui/material';
 import MenuItem from "@material-ui/core/MenuItem";
 import InfoBox from './Components/InfoBox';
 import LineChart from './Components/Chart/lineGraph';
@@ -15,10 +16,9 @@ import {
   getInfoByCountry,
 } from "./apis/api";
 
-//import { prettyPrintStat } from "./extras/functions"
 import { CovidInfo, DailyInfo } from "./extras/objectInterface"
 import { prettyPrintStat } from './extras/functions';
-
+import { TRUE } from 'sass';
 
 interface Country {
   name: string;
@@ -28,10 +28,12 @@ interface Country {
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [searchCountry, setSearchCountry] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [covidInfo, setCovidInfo] = useState<CovidInfo | undefined>(undefined);
   const [dailyInfo, setDailyInfo] = useState<DailyInfo[]>([]);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   useEffect(() => {
     const getCountriesList = async () => {
@@ -77,7 +79,15 @@ function App() {
       value: unknown;
     }>
   ) => {
-    const countryC = event.target.value as string;
+
+    const input = event.target.value as string;
+    let countryC : string;
+
+    if (input === undefined) {
+      countryC = country;
+    } else {
+      countryC = input;
+    }
 
     let response: CovidInfo;
     let changeGraph: DailyInfo[];
@@ -88,10 +98,24 @@ function App() {
       response = await getInfoByCountry(countryC);
       changeGraph = [];
     }
+
     setCovidInfo(response);
-    setCountry(event.target.value as string);
+    setCountry(countryC);
     setDailyInfo(changeGraph);
   };
+
+  const searchFunction = async (
+    event: ChangeEvent<{
+      name?:string | undefined;
+      value: unknown;
+    }>
+  ) => {
+    const filterText = event.target.value as string;
+    setSearchCountry(filterText);
+  };
+
+  const displayCountries = countries.filter(c => c.name.toLowerCase().startsWith(searchCountry.toLowerCase()));
+
 
   function LoadGraph() {
     if (dailyInfo.length !== 0) {
@@ -118,17 +142,33 @@ function App() {
       <div className='app__left'>
         <div className='app__header'>
           <h1>COVID TRACKER</h1>
-          <FormControl className='app__drop-down' variant='outlined'>
-            <Select onChange={onCountryChange} value={country}>
-              {countries.map((country: Country, index: number) => {
-                return (
-                  <MenuItem key={index.toString()} value={country.name}>
-                    {country.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
+          <Box>
+            <FormControl className='app__drop-down' variant='outlined'>
+              <Select fullWidth MenuProps={{ autoFocus: false }} onChange={onCountryChange} 
+                      value={country} onClose={() => {setSearchCountry("")}} renderValue={() => country}
+              >
+                <ListSubheader className='textField'>
+                  <TextField
+                    size='small'
+                    autoFocus
+                    placeholder='Search country...'
+                    fullWidth
+                    onChange={searchFunction}
+                    onKeyDown={(e) => {
+                      if (e.key !== "Escape") {
+                        e.stopPropagation();
+                      }
+                    }}
+                  />
+                </ListSubheader>
+                {displayCountries.map((country: Country, index: number) => (
+                    <MenuItem key={index.toString()} value={country.name}>
+                      {country.name}
+                    </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
         </div>
         <div className='app__stats'>
           <InfoBox
