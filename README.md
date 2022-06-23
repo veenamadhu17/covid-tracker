@@ -11,7 +11,7 @@ This COVID Tracker shows the total number of corona cases, recovered cases and n
 Make sure that you have [Node.js](https://nodejs.org/en/) installed. In the project directory, you can run:
 
 ```console
-npm install
+npm install --force
 npm start
 ```
 
